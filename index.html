@@ -1,1 +1,69 @@
-Hello World
+<html><head>
+<meta charset="utf-8">
+<title>DTH ✈</title>
+<style>
+body{margin:0}a:hover{opacity:1 !important}
+@font-face{font-family:t;src:url(Titillium.woff)}
+a{font-family:t;font-size:2.6em;text-decoration:none;color:#000}
+div{position:absolute;z-index:1000}
+.square{width:20px;height:20px;z-index:-1}
+.rain{width:4px;height:4px;background-color:blue}
+#bc{bottom:0;right:0}
+</style>
+</head><body>
+<div id="bc">
+	<a href="notes">davidthamm@gmail.com</a>
+</div>
+<script>
+var rn = Math.random();
+style = document.createElement('style');
+function rainSquares() {
+	if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+		style.innerText = "body{background-color:#000}a{color:#fff}.rain{background-color:#0084bd}";
+	}
+	if (rn <= .2) { //rain
+		style.innerText += "body{overflow:hidden}";
+
+		function r(h, y) {
+			var s = .3 + .9 * Math.random();
+			var i = setInterval(function() {
+				y > innerHeight && (clearInterval(i), h.parentNode.removeChild(h));
+				y += s;
+				h.style.top = y + "px";
+			}, 5);
+		}
+		setInterval(function() {
+			b = document.createElement("div");
+			b.style.left = Math.floor(Math.random() * (innerWidth - 4)) + "px";
+			t = -Math.floor(Math.random() * 100);
+			b.style.top = t + "px";
+			b.className = "rain"
+			document.body.appendChild(b);
+			r(b, t);
+		}, 100);
+	} else { // squares
+		function f() {
+			var d = b, a = 1,
+			e = setInterval(function() {
+				.1 >= a && (clearInterval(e), d.parentNode.removeChild(d));
+				d.style.opacity = a;
+				a -= .05;
+			}, 100);
+		};
+		setInterval(function() {
+			b = document.createElement("div"), b.className = "square", c = b.style;
+			c.left = 4 + 24 * Math.floor(Math.random() * (innerWidth - 24) / 24) + "px";
+			c.top = 4 + 24 * Math.floor(Math.random() * (innerHeight - 24) / 24) + "px";
+			for (var d = "0123456789ABCDEF".split(""), a = "#", e = 0; 6 > e; e++) {
+				a += d[Math.round(15 * Math.random())];
+			}
+			c.backgroundColor = a;
+			document.body.appendChild(b);
+			f();
+		}, 50);
+	}
+}
+rainSquares();
+document.head.appendChild(style);
+</script>
+</body></html>
